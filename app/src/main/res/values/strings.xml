@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">News API</string>
+
+    <string name="apikey">78782dce784c49c788e5fb1af8c40869</string>
+    <string name="error_rto">Permintaan time out!</string>
+    <string name="error_server">Gagal terhubung ke server API!</string>
+
+    <string-array name="categories">
+        <item>business</item>
+        <item>entertainment</item>
+        <item>general</item>
+        <item>health</item>
+        <item>science</item>
+        <item>sports</item>
+        <item>technology</item>
+    </string-array>
+</resources>
