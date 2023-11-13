@@ -1,10 +1,13 @@
 package mohammad.toriq.newsapi.views.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import mohammad.toriq.configs.Constants
 import mohammad.toriq.newsapi.R
 import mohammad.toriq.newsapi.databinding.ItemAdapterArticleBinding
@@ -49,8 +52,14 @@ open class AdapterArticle(context: Context) : AbstractBindingItem<ItemAdapterArt
     }
     override fun initUI() {
         binding.title.text = data?.title
-        binding.content.text = (if (data?.content != null) data?.content else data?.description)
-        binding.author.text = "Author : "+Util.firstCapitalize(data?.author!!)
+        var desc = if (data?.content != null) data?.content else data?.description
+        binding.content.text = Util.loadHtmlView(desc!!,binding.content)
+        if(data?.author!=null){
+            binding.author.visibility = View.VISIBLE
+            binding.author.text = "Author : "+Util.firstCapitalize(data?.author!!)
+        }else{
+            binding.author.visibility = View.GONE
+        }
         binding.publish.text = "Publish : "+changeFormatDate()
         if(data?.urlToImage!=null){
             binding.image.visibility = View.VISIBLE

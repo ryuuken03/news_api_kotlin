@@ -1,6 +1,5 @@
 package mohammad.toriq.newsapi.util
 
-import android.R.attr.name
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -9,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Priority
@@ -28,6 +28,9 @@ import mohammad.toriq.newsapi.R
 import mohammad.toriq.newsapi.api.RetrofitClient
 import mohammad.toriq.util.GlideApp
 import org.json.JSONObject
+import org.sufficientlysecure.htmltextview.HtmlFormatter
+import org.sufficientlysecure.htmltextview.HtmlFormatterBuilder
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter
 import retrofit2.Response
 import java.net.SocketTimeoutException
 import java.text.ParseException
@@ -235,6 +238,12 @@ class Util {
             }
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+        fun loadHtmlView(string: String, textView: TextView): CharSequence? {
+            return HtmlFormatter.formatHtml(
+                HtmlFormatterBuilder().setHtml(string).setImageGetter(HtmlHttpImageGetter(textView))
+            )
+        }
+
 
     }
 }
